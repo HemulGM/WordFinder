@@ -72,6 +72,16 @@ object FormMain: TFormMain
       TabStop = False
       OnClick = ButtonAboutClick
     end
+    object ButtonClear: TButton
+      Left = 214
+      Top = 6
+      Width = 98
+      Height = 34
+      Caption = #1054#1095#1080#1089#1090#1080#1090#1100
+      TabOrder = 4
+      TabStop = False
+      OnClick = ButtonClearClick
+    end
   end
   object PanelPad: TPanel
     Left = 0
@@ -82,6 +92,7 @@ object FormMain: TFormMain
     BevelKind = bkFlat
     BevelOuter = bvNone
     TabOrder = 1
+    ExplicitTop = 2
     object Label1: TLabel
       Left = 6
       Top = 408

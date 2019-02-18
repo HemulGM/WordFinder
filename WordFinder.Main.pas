@@ -20,6 +20,7 @@ type
   //Данные слова
   TWordData = record
    Text:string;     //Слово
+   Gifts:Integer;
    Mask:TCharsState;//Матрица состояний, чтоб отобразить при выборе
   end;
   //Список найденных слов
@@ -63,6 +64,7 @@ type
     ButtonRandom: TButton;
     ButtonClose: TButton;
     ButtonAbout: TButton;
+    ButtonClear: TButton;
     procedure EditLet1Click(Sender: TObject);
     procedure EditLet1KeyPress(Sender: TObject; var Key: Char);
     procedure ButtonFindClick(Sender: TObject);
@@ -74,11 +76,15 @@ type
     procedure ButtonRandomClick(Sender: TObject);
     procedure ButtonCloseClick(Sender: TObject);
     procedure ButtonAboutClick(Sender: TObject);
+    procedure ButtonClearClick(Sender: TObject);
   private
     FChars:TChars;
     FCharsState:TCharsState;
     Dict:TStringList;
     FWords:TWords;
+    FFieldGifts:TCharsState;
+    procedure UpdateGifts;
+    function CalcGifts(States:TCharsState):Integer;
   public
     destructor Destroy; override;
   end;
@@ -97,6 +103,15 @@ begin
  Result.Ord:=AOrd;
 end;
 
+//Очистка состояния символов
+procedure ClearState(var States:TCharsState);
+var x, y:Integer;
+begin
+ for x:= 1 to 5 do
+  for y:= 1 to 5 do
+   States[x, y]:=CharState(False, 0);
+end;
+
 procedure TFormMain.ButtonAboutClick(Sender: TObject);
 begin
  MessageBox(Handle,
@@ -105,6 +120,12 @@ begin
   'Программа для поиска слов в матрице символов 5х5'+#13+#10+
   'Сайт: www.hemulgm.ru',
   '', MB_ICONINFORMATION or MB_OK);
+end;
+
+procedure TFormMain.ButtonClearClick(Sender: TObject);
+begin
+ ClearState(FFieldGifts);
+ UpdateGifts;
 end;
 
 procedure TFormMain.ButtonCloseClick(Sender: TObject);
@@ -169,16 +190,6 @@ begin
   end;
 end;
 
-//Очистка состояния символов
-procedure ClearState;
-var x, y:Integer;
-begin
- for x:= 1 to 5 do
-  for y:= 1 to 5 do
-   FCharsState[x, y]:=CharState(False, 0);
-end;
-
-
 begin
  //Собираем данные из полей в массив
  for i:= 0 to PanelPad.ControlCount-1 do
@@ -197,14 +208,14 @@ begin
     begin
      Wrd:=Dict[i];                                //Берём слово из словаря
      if Wrd.Length < 3 then Continue;             //Если оно менее 3, то пропускаем
-     ClearState;                                  //Очищаем состояние матрицы отмеченных символов
+     ClearState(FCharsState);                     //Очищаем состояние матрицы отмеченных символов
      for y:= 1 to 5 do                            //Идём по матрице символов
       for x := 1 to 5 do
        begin                                      //Если символ в матрице является началом слова
         if Dict[i][1] = AnsiLowerCase(FChars[x, y])[1] then
          begin
-          FCharsState[x, y]:=CharState(True, 1);  //То, устанвляиваем состояние - занят
-          if FindNext(x, y, 1) then               //Передем на поиск следующих символов слова
+          FCharsState[x, y]:=CharState(True, 1);  //То, устанвляиваем состояние текущего символа - занят
+          if FindNext(x, y, 1) then               //Передаем на поиск следующих символов слова
            begin                                  //Если нашли всё слово
             if FWords.IndexOf(Wrd) < 0 then       //И его уже нет в списке
              begin                                //То добавляем его в список
@@ -213,15 +224,36 @@ begin
               FWords.Add(Item);                   //
              end;
            end;
-          ClearState;                             //Каждый раз очищаем состояние, чтоб ничего не осталось
+          ClearState(FCharsState);                //Каждый раз очищаем состояние, чтоб ничего не осталось
          end;
+       end;
+    end;
+   for x:=0 to FWords.Count-1 do
+    begin
+     Item:=FWords[x];
+     Item.Gifts:=CalcGifts(Item.Mask);
+     FWords[x]:=Item;
+    end;
+   //Процесс поиска закончен, отображаем результат
+   //Сортируем по количеству символов в слове
+   for x:=0 to FWords.Count-1 do
+    begin
+     Item:=FWords[x];
+     Item.Gifts:=CalcGifts(Item.Mask);
+     FWords[x]:=Item;
+     for i:=0 to FWords.Count-2 do
+      if FWords[i].Text.Length < FWords[i+1].Text.Length then
+       begin
+        Item:=FWords[i];
+        FWords[i]:=FWords[i+1];
+        FWords[i+1]:=Item;
        end;
     end;
    //Процесс поиска закончен, отображаем результат
    //Сортируем по количеству символов в слове
    for x:=0 to FWords.Count-1 do
     for i:=0 to FWords.Count-2 do
-     if FWords[i].Text.Length < FWords[i+1].Text.Length then
+     if (FWords[i].Gifts < FWords[i+1].Gifts) and (FWords[i+1].Text.Length > 4) then
       begin
        Item:=FWords[i];
        FWords[i]:=FWords[i+1];
@@ -252,7 +284,18 @@ begin
  for i:= 0 to PanelPad.ControlCount-1 do
   if PanelPad.Controls[i] is TEdit then
    (PanelPad.Controls[i] as TEdit).Text:=AnsiChar(RandomRange(Ord('А'), Ord('Я')+1));
+ ClearState(FFieldGifts);
+ UpdateGifts;
  ButtonFindClick(nil);
+end;
+
+function TFormMain.CalcGifts(States: TCharsState): Integer;
+var y, x: Integer;
+begin
+ Result:=0;
+ for y:= 1 to 5 do
+  for x:= 1 to 5 do
+   if States[x, y].State and FFieldGifts[x, y].State then Inc(Result);
 end;
 
 destructor TFormMain.Destroy;
@@ -274,9 +317,20 @@ begin
 end;
 
 procedure TFormMain.EditLet1KeyPress(Sender: TObject; var Key: Char);
+var x:Integer;
+    Item:TCharState;
 begin
  case Key of
   #13: Key:=#0;
+  ' ':
+   begin
+    Key:=#0;
+    x:=(Sender as TEdit).Tag;
+    Item:=FFieldGifts[(x-1) mod 5+1, (x-1) div 5+1];
+    Item.State:=not Item.State;
+    FFieldGifts[(x-1) mod 5+1, (x-1) div 5+1]:=Item;
+    UpdateGifts;
+   end;
  end;
  //Следующее поле по TabOrder
  SelectNext((Sender as TEdit), True, True);
@@ -341,6 +395,26 @@ begin
   begin
    ShellExecute(Handle, 'open', PWideChar('http://gramota.ru/slovari/dic/?word='+ListViewWords.Items[ListViewWords.ItemIndex].Caption+'&all=x'), nil, nil, SW_NORMAL);
   end;
+end;
+
+procedure TFormMain.UpdateGifts;
+var x, y, t: Integer;
+begin
+ //Очищаем цвет полей
+ for x:= 0 to PanelPad.ControlCount-1 do
+  if PanelPad.Controls[x] is TEdit then
+    (PanelPad.Controls[x] as TEdit).Font.Color:=clBlack;
+ for y:= 1 to 5 do
+  for x:= 1 to 5 do
+   begin
+    if FFieldGifts[x, y].State then
+     for t:= 0 to PanelPad.ControlCount-1 do
+      if PanelPad.Controls[t] is TEdit then   //Координаты в номер
+       if (PanelPad.Controls[t] as TEdit).Tag = (y-1) * 5 + 1 + (x-1) then
+        begin
+         (PanelPad.Controls[t] as TEdit).Font.Color:=$00007DFA;
+        end;
+   end;
 end;
 
 { TWords }
