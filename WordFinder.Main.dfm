@@ -26,61 +26,212 @@ object FormMain: TFormMain
     Width = 530
     Height = 49
     Align = alClient
-    BevelKind = bkFlat
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitTop = 433
-    ExplicitWidth = 531
-    ExplicitHeight = 46
-    object ButtonFind: TButton
-      Left = 6
-      Top = 6
-      Width = 98
-      Height = 34
+    object ButtonFind: TButtonFlat
+      Left = 0
+      Top = 0
+      Width = 105
+      Height = 49
+      Cursor = crDefault
+      Align = alLeft
       Caption = #1053#1072#1081#1090#1080' '#1089#1083#1086#1074#1072
+      ColorNormal = 13672271
+      ColorOver = 14530941
+      ColorPressed = 10252841
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      FontOver.Charset = DEFAULT_CHARSET
+      FontOver.Color = clWindowText
+      FontOver.Height = -15
+      FontOver.Name = 'Segoe UI'
+      FontOver.Style = []
+      FontDown.Charset = DEFAULT_CHARSET
+      FontDown.Color = clWindowText
+      FontDown.Height = -15
+      FontDown.Name = 'Segoe UI'
+      FontDown.Style = []
+      IgnorBounds = True
+      OnClick = ButtonFindClick
+      RoundRectParam = 0
+      ShowFocusRect = False
       TabOrder = 0
       TabStop = False
-      OnClick = ButtonFindClick
+      TextFormat = [tfCenter, tfSingleLine, tfVerticalCenter]
+      SubTextFont.Charset = DEFAULT_CHARSET
+      SubTextFont.Color = clWhite
+      SubTextFont.Height = -13
+      SubTextFont.Name = 'Tahoma'
+      SubTextFont.Style = []
+      ExplicitLeft = 32
+      ExplicitTop = -2
     end
-    object ButtonRandom: TButton
-      Left = 110
-      Top = 6
-      Width = 98
-      Height = 34
+    object ButtonRandom: TButtonFlat
+      Left = 105
+      Top = 0
+      Width = 105
+      Height = 49
+      Cursor = crDefault
+      Align = alLeft
       Caption = #1057#1083#1091#1095#1072#1081#1085#1099#1077
+      ColorNormal = 13672271
+      ColorOver = 14530941
+      ColorPressed = 10252841
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      FontOver.Charset = DEFAULT_CHARSET
+      FontOver.Color = clWindowText
+      FontOver.Height = -15
+      FontOver.Name = 'Segoe UI'
+      FontOver.Style = []
+      FontDown.Charset = DEFAULT_CHARSET
+      FontDown.Color = clWindowText
+      FontDown.Height = -15
+      FontDown.Name = 'Segoe UI'
+      FontDown.Style = []
+      IgnorBounds = True
+      OnClick = ButtonRandomClick
+      RoundRectParam = 0
+      ShowFocusRect = False
       TabOrder = 1
       TabStop = False
-      OnClick = ButtonRandomClick
+      TextFormat = [tfCenter, tfSingleLine, tfVerticalCenter]
+      SubTextFont.Charset = DEFAULT_CHARSET
+      SubTextFont.Color = clWhite
+      SubTextFont.Height = -13
+      SubTextFont.Name = 'Tahoma'
+      SubTextFont.Style = []
+      ExplicitLeft = 137
+      ExplicitTop = -2
     end
-    object ButtonClose: TButton
-      Left = 422
-      Top = 6
-      Width = 98
-      Height = 34
+    object ButtonClose: TButtonFlat
+      Left = 425
+      Top = 0
+      Width = 105
+      Height = 49
+      Cursor = crDefault
+      Align = alRight
       Caption = #1047#1072#1082#1088#1099#1090#1100
+      ColorNormal = 13672271
+      ColorOver = 14530941
+      ColorPressed = 10252841
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      FontOver.Charset = DEFAULT_CHARSET
+      FontOver.Color = clWindowText
+      FontOver.Height = -15
+      FontOver.Name = 'Segoe UI'
+      FontOver.Style = []
+      FontDown.Charset = DEFAULT_CHARSET
+      FontDown.Color = clWindowText
+      FontDown.Height = -15
+      FontDown.Name = 'Segoe UI'
+      FontDown.Style = []
+      IgnorBounds = True
+      OnClick = ButtonCloseClick
+      RoundRectParam = 0
+      ShowFocusRect = False
       TabOrder = 2
       TabStop = False
-      OnClick = ButtonCloseClick
+      TextFormat = [tfCenter, tfSingleLine, tfVerticalCenter]
+      SubTextFont.Charset = DEFAULT_CHARSET
+      SubTextFont.Color = clWhite
+      SubTextFont.Height = -13
+      SubTextFont.Name = 'Tahoma'
+      SubTextFont.Style = []
+      ExplicitLeft = 496
+      ExplicitTop = -2
     end
-    object ButtonAbout: TButton
-      Left = 318
-      Top = 6
-      Width = 98
-      Height = 34
+    object ButtonAbout: TButtonFlat
+      Left = 320
+      Top = 0
+      Width = 105
+      Height = 49
+      Cursor = crDefault
+      Align = alRight
       Caption = #1054' '#1087#1088#1086#1075#1088#1072#1084#1084#1077
+      ColorNormal = 13672271
+      ColorOver = 14530941
+      ColorPressed = 10252841
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      FontOver.Charset = DEFAULT_CHARSET
+      FontOver.Color = clWindowText
+      FontOver.Height = -15
+      FontOver.Name = 'Segoe UI'
+      FontOver.Style = []
+      FontDown.Charset = DEFAULT_CHARSET
+      FontDown.Color = clWindowText
+      FontDown.Height = -15
+      FontDown.Name = 'Segoe UI'
+      FontDown.Style = []
+      IgnorBounds = True
+      OnClick = ButtonAboutClick
+      RoundRectParam = 0
+      ShowFocusRect = False
       TabOrder = 3
       TabStop = False
-      OnClick = ButtonAboutClick
+      TextFormat = [tfCenter, tfSingleLine, tfVerticalCenter]
+      SubTextFont.Charset = DEFAULT_CHARSET
+      SubTextFont.Color = clWhite
+      SubTextFont.Height = -13
+      SubTextFont.Name = 'Tahoma'
+      SubTextFont.Style = []
+      ExplicitLeft = 457
+      ExplicitTop = -2
     end
-    object ButtonClear: TButton
-      Left = 214
-      Top = 6
-      Width = 98
-      Height = 34
+    object ButtonClear: TButtonFlat
+      Left = 210
+      Top = 0
+      Width = 110
+      Height = 49
+      Cursor = crDefault
+      Align = alClient
       Caption = #1054#1095#1080#1089#1090#1080#1090#1100
+      ColorNormal = 13672271
+      ColorOver = 14530941
+      ColorPressed = 10252841
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      FontOver.Charset = DEFAULT_CHARSET
+      FontOver.Color = clWindowText
+      FontOver.Height = -15
+      FontOver.Name = 'Segoe UI'
+      FontOver.Style = []
+      FontDown.Charset = DEFAULT_CHARSET
+      FontDown.Color = clWindowText
+      FontDown.Height = -15
+      FontDown.Name = 'Segoe UI'
+      FontDown.Style = []
+      IgnorBounds = True
+      OnClick = ButtonClearClick
+      RoundRectParam = 0
+      ShowFocusRect = False
       TabOrder = 4
       TabStop = False
-      OnClick = ButtonClearClick
+      TextFormat = [tfCenter, tfSingleLine, tfVerticalCenter]
+      SubTextFont.Charset = DEFAULT_CHARSET
+      SubTextFont.Color = clWhite
+      SubTextFont.Height = -13
+      SubTextFont.Name = 'Tahoma'
+      SubTextFont.Style = []
+      ExplicitLeft = 242
+      ExplicitTop = -2
     end
   end
   object PanelPad: TPanel
@@ -89,10 +240,10 @@ object FormMain: TFormMain
     Width = 530
     Height = 431
     Align = alTop
-    BevelKind = bkFlat
     BevelOuter = bvNone
+    Color = clWhite
+    ParentBackground = False
     TabOrder = 1
-    ExplicitTop = 2
     object Label1: TLabel
       Left = 6
       Top = 408
@@ -106,6 +257,15 @@ object FormMain: TFormMain
       Width = 7
       Height = 17
       Caption = '0'
+    end
+    object Label2: TLabel
+      Left = 6
+      Top = 312
+      Width = 220
+      Height = 90
+      AutoSize = False
+      Caption = '1 - x2'#13#10'2 - x3'#13#10'3 - c2'#13#10'4 - c3'#13#10#1055#1088#1086#1073#1077#1083' - '#1086#1095#1080#1089#1090#1080#1090#1100' '#1086#1094#1077#1085#1082#1091
+      WordWrap = True
     end
     object EditLet1: TEdit
       Tag = 1
@@ -708,32 +868,57 @@ object FormMain: TFormMain
       OnClick = EditLet1Click
       OnKeyPress = EditLet1KeyPress
     end
-    object ListViewWords: TListView
+    object TableExWords: TTableEx
       Left = 236
-      Top = 6
-      Width = 284
-      Height = 415
-      Columns = <
-        item
-          Caption = #1057#1083#1086#1074#1086
-          Width = 260
-        end>
+      Top = 0
+      Width = 294
+      Height = 431
+      Align = alRight
+      BorderStyle = bsNone
+      DefaultRowHeight = 35
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -20
-      Font.Name = 'Courier New'
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
       Font.Style = []
-      HideSelection = False
-      ReadOnly = True
-      RowSelect = True
       ParentFont = False
-      ShowColumnHeaders = False
       TabOrder = 25
-      TabStop = False
-      ViewStyle = vsReport
-      OnChange = ListViewWordsChange
-      OnClick = ListViewWordsClick
-      OnDblClick = ListViewWordsDblClick
+      OnDblClick = TableExWordsDblClick
+      ItemIndex = -1
+      OnItemClick = TableExWordsItemClick
+      GetData = TableExWordsGetData
+      Columns = <
+        item
+          Width = 230
+        end
+        item
+          Width = 64
+          Format = [tfRight, tfSingleLine, tfVerticalCenter]
+          MinWidth = 32
+        end>
+      ShowScrollBar = False
+      ItemCount = 1
+      FontHotLine.Charset = DEFAULT_CHARSET
+      FontHotLine.Color = 2631720
+      FontHotLine.Height = -16
+      FontHotLine.Name = 'Segoe UI'
+      FontHotLine.Style = []
+      FontLine.Charset = DEFAULT_CHARSET
+      FontLine.Color = 2631720
+      FontLine.Height = -16
+      FontLine.Name = 'Segoe UI'
+      FontLine.Style = []
+      FontSelLine.Charset = DEFAULT_CHARSET
+      FontSelLine.Color = clWhite
+      FontSelLine.Height = -16
+      FontSelLine.Name = 'Segoe UI'
+      FontSelLine.Style = []
+      ShowColumns = False
+      ColumnsFont.Charset = DEFAULT_CHARSET
+      ColumnsFont.Color = 2631720
+      ColumnsFont.Height = -11
+      ColumnsFont.Name = 'Tahoma'
+      ColumnsFont.Style = []
     end
   end
 end
