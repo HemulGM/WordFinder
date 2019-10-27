@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{B3BC76E7-252D-4F5D-BA48-C51CBA868067}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="WordFinder.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\Components\HGMComponents.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="WordFinder">
+        <MSBuild Projects="WordFinder.dproj"/>
+    </Target>
+    <Target Name="WordFinder:Clean">
+        <MSBuild Projects="WordFinder.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="WordFinder:Make">
+        <MSBuild Projects="WordFinder.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="HGMComponents">
+        <MSBuild Projects="..\Components\HGMComponents.dproj"/>
+    </Target>
+    <Target Name="HGMComponents:Clean">
+        <MSBuild Projects="..\Components\HGMComponents.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="HGMComponents:Make">
+        <MSBuild Projects="..\Components\HGMComponents.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="WordFinder;HGMComponents"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="WordFinder:Clean;HGMComponents:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="WordFinder:Make;HGMComponents:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

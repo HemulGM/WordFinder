@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, System.Generics.Collections,
-  Vcl.ComCtrls, HGM.Button, Vcl.Grids, HGM.Controls.VirtualTable;
+  Vcl.ComCtrls, HGM.Button, Vcl.Grids, HGM.Controls.VirtualTable, HGM.License;
 
 type
   //Матрица символов из полей
@@ -66,6 +66,7 @@ type
     ButtonClear: TButtonFlat;
     TableExWords: TTableEx;
     Label2: TLabel;
+    hTrue: ThTrue;
     procedure EditLet1Click(Sender: TObject);
     procedure EditLet1KeyPress(Sender: TObject; var Key: Char);
     procedure ButtonFindClick(Sender: TObject);
@@ -358,6 +359,12 @@ begin
     UpdateGifts;
     Exit;
    end;
+  #8:
+   begin
+    Key:=#0;
+    SelectNext((Sender as TEdit), False, True);
+    Exit;
+   end;
  end;
  //Следующее поле по TabOrder
  SelectNext((Sender as TEdit), True, True);
@@ -370,6 +377,7 @@ begin
  ClientWidth:=530;
  //Создаем и загружаем словарь
  Dict:=TStringList.Create;
+ if not hTrue.IsCreated then Halt;
  if FileExists('dict.txt') then
   try
    Dict.LoadFromFile('dict.txt')
